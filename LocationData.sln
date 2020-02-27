@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationData.ApiRepository", "ApiRepository\LocationData.ApiRepository.csproj", "{F02C763B-3A9E-40C7-94FD-96D244C0142E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{EE18B77F-03DC-493C-BD38-D3EE520DA2F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiRepository.UnitTests", "ApiRepository.UnitTests\ApiRepository.UnitTests.csproj", "{261C391C-8D12-450B-868C-D1C2652EB3BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyUI", "DummyUI\DummyUI.csproj", "{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{BAC6752D-367F-480D-98B3-2A5FB7DD4B0C}"
+	ProjectSection(SolutionItems) = preProject
+		..\CharacterCreator\CodeCoverage.runsettings = ..\CharacterCreator\CodeCoverage.runsettings
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationData.Core", "LocationData.Core\LocationData.Core.csproj", "{4DE0533A-250A-4FCE-8306-9FD343F7E677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationData.Core.UnitTests", "LocationData.Core.UnitTests\LocationData.Core.UnitTests.csproj", "{A4E0C1DE-E539-419E-99CC-7633FD06160F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F02C763B-3A9E-40C7-94FD-96D244C0142E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F02C763B-3A9E-40C7-94FD-96D244C0142E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F02C763B-3A9E-40C7-94FD-96D244C0142E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F02C763B-3A9E-40C7-94FD-96D244C0142E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{261C391C-8D12-450B-868C-D1C2652EB3BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{261C391C-8D12-450B-868C-D1C2652EB3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{261C391C-8D12-450B-868C-D1C2652EB3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{261C391C-8D12-450B-868C-D1C2652EB3BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE0533A-250A-4FCE-8306-9FD343F7E677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE0533A-250A-4FCE-8306-9FD343F7E677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE0533A-250A-4FCE-8306-9FD343F7E677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE0533A-250A-4FCE-8306-9FD343F7E677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4E0C1DE-E539-419E-99CC-7633FD06160F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E0C1DE-E539-419E-99CC-7633FD06160F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E0C1DE-E539-419E-99CC-7633FD06160F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E0C1DE-E539-419E-99CC-7633FD06160F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{261C391C-8D12-450B-868C-D1C2652EB3BD} = {EE18B77F-03DC-493C-BD38-D3EE520DA2F8}
+		{A4E0C1DE-E539-419E-99CC-7633FD06160F} = {EE18B77F-03DC-493C-BD38-D3EE520DA2F8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E710EB1B-5FA4-45AA-B776-54CD603BDACC}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/confused
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ApiRepository.UnitTests\\ApiRepository.UnitTests.csproj
+		SccProjectTopLevelParentUniqueName1 = LocationData.sln
+		SccProjectName1 = ApiRepository.UnitTests
+		SccLocalPath1 = ApiRepository.UnitTests
+		SccProjectUniqueName2 = DummyUI\\DummyUI.csproj
+		SccProjectName2 = DummyUI
+		SccLocalPath2 = DummyUI
+		SccProjectUniqueName3 = ApiRepository\\LocationData.ApiRepository.csproj
+		SccProjectName3 = ApiRepository
+		SccLocalPath3 = ApiRepository
+		SccProjectUniqueName4 = LocationData.Core\\LocationData.Core.csproj
+		SccProjectName4 = LocationData.Core
+		SccLocalPath4 = LocationData.Core
+		SccProjectUniqueName5 = LocationData.Core.UnitTests\\LocationData.Core.UnitTests.csproj
+		SccProjectTopLevelParentUniqueName5 = LocationData.sln
+		SccProjectName5 = LocationData.Core.UnitTests
+		SccLocalPath5 = LocationData.Core.UnitTests
+	EndGlobalSection
+EndGlobal
