@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationData.ApiRepository"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{EE18B77F-03DC-493C-BD38-D3EE520DA2F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiRepository.UnitTests", "ApiRepository.UnitTests\ApiRepository.UnitTests.csproj", "{261C391C-8D12-450B-868C-D1C2652EB3BD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyUI", "DummyUI\DummyUI.csproj", "{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationData.ApiRepository.UnitTests", "ApiRepository.UnitTests\LocationData.ApiRepository.UnitTests.csproj", "{261C391C-8D12-450B-868C-D1C2652EB3BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{BAC6752D-367F-480D-98B3-2A5FB7DD4B0C}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,7 +16,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationData.Core", "LocationData.Core\LocationData.Core.csproj", "{4DE0533A-250A-4FCE-8306-9FD343F7E677}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationData.Core.UnitTests", "LocationData.Core.UnitTests\LocationData.Core.UnitTests.csproj", "{A4E0C1DE-E539-419E-99CC-7633FD06160F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationData.Core.UnitTests", "LocationData.Core.UnitTests\LocationData.Core.UnitTests.csproj", "{A4E0C1DE-E539-419E-99CC-7633FD06160F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationData.UI", "LocationData.UI\LocationData.UI.csproj", "{C3CAD5DF-E2AE-4744-BB50-8A2382414E0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationData.Data", "LocationData.Data\LocationData.Data.csproj", "{0E7CEDEE-1654-4660-9A49-14FF0B7ECABF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationData.Data.UnitTests", "LocationData.Data.UnitTests\LocationData.Data.UnitTests.csproj", "{7842F5B7-06A8-4FB5-9586-373A680BC6EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +38,6 @@ Global
 		{261C391C-8D12-450B-868C-D1C2652EB3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{261C391C-8D12-450B-868C-D1C2652EB3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{261C391C-8D12-450B-868C-D1C2652EB3BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07DBDC99-11A2-44EF-B7B9-D17D9CACB47B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4DE0533A-250A-4FCE-8306-9FD343F7E677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4DE0533A-250A-4FCE-8306-9FD343F7E677}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DE0533A-250A-4FCE-8306-9FD343F7E677}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,6 +46,18 @@ Global
 		{A4E0C1DE-E539-419E-99CC-7633FD06160F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4E0C1DE-E539-419E-99CC-7633FD06160F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4E0C1DE-E539-419E-99CC-7633FD06160F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3CAD5DF-E2AE-4744-BB50-8A2382414E0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3CAD5DF-E2AE-4744-BB50-8A2382414E0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3CAD5DF-E2AE-4744-BB50-8A2382414E0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3CAD5DF-E2AE-4744-BB50-8A2382414E0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E7CEDEE-1654-4660-9A49-14FF0B7ECABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E7CEDEE-1654-4660-9A49-14FF0B7ECABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E7CEDEE-1654-4660-9A49-14FF0B7ECABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E7CEDEE-1654-4660-9A49-14FF0B7ECABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7842F5B7-06A8-4FB5-9586-373A680BC6EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7842F5B7-06A8-4FB5-9586-373A680BC6EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7842F5B7-06A8-4FB5-9586-373A680BC6EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7842F5B7-06A8-4FB5-9586-373A680BC6EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,31 +65,39 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{261C391C-8D12-450B-868C-D1C2652EB3BD} = {EE18B77F-03DC-493C-BD38-D3EE520DA2F8}
 		{A4E0C1DE-E539-419E-99CC-7633FD06160F} = {EE18B77F-03DC-493C-BD38-D3EE520DA2F8}
+		{7842F5B7-06A8-4FB5-9586-373A680BC6EF} = {EE18B77F-03DC-493C-BD38-D3EE520DA2F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E710EB1B-5FA4-45AA-B776-54CD603BDACC}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://dev.azure.com/confused
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ApiRepository.UnitTests\\ApiRepository.UnitTests.csproj
-		SccProjectTopLevelParentUniqueName1 = LocationData.sln
-		SccProjectName1 = ApiRepository.UnitTests
-		SccLocalPath1 = ApiRepository.UnitTests
-		SccProjectUniqueName2 = DummyUI\\DummyUI.csproj
-		SccProjectName2 = DummyUI
-		SccLocalPath2 = DummyUI
-		SccProjectUniqueName3 = ApiRepository\\LocationData.ApiRepository.csproj
-		SccProjectName3 = ApiRepository
-		SccLocalPath3 = ApiRepository
-		SccProjectUniqueName4 = LocationData.Core\\LocationData.Core.csproj
-		SccProjectName4 = LocationData.Core
-		SccLocalPath4 = LocationData.Core
-		SccProjectUniqueName5 = LocationData.Core.UnitTests\\LocationData.Core.UnitTests.csproj
-		SccProjectTopLevelParentUniqueName5 = LocationData.sln
-		SccProjectName5 = LocationData.Core.UnitTests
-		SccLocalPath5 = LocationData.Core.UnitTests
+		SccProjectUniqueName1 = ApiRepository\\LocationData.ApiRepository.csproj
+		SccProjectName1 = ApiRepository
+		SccLocalPath1 = ApiRepository
+		SccProjectUniqueName2 = LocationData.Core\\LocationData.Core.csproj
+		SccProjectName2 = LocationData.Core
+		SccLocalPath2 = LocationData.Core
+		SccProjectUniqueName3 = LocationData.Core.UnitTests\\LocationData.Core.UnitTests.csproj
+		SccProjectTopLevelParentUniqueName3 = LocationData.sln
+		SccProjectName3 = LocationData.Core.UnitTests
+		SccLocalPath3 = LocationData.Core.UnitTests
+		SccProjectUniqueName4 = LocationData.UI\\LocationData.UI.csproj
+		SccProjectName4 = LocationData.UI
+		SccLocalPath4 = LocationData.UI
+		SccProjectUniqueName5 = LocationData.Data\\LocationData.Data.csproj
+		SccProjectName5 = LocationData.Data
+		SccLocalPath5 = LocationData.Data
+		SccProjectUniqueName6 = LocationData.Data.UnitTests\\LocationData.Data.UnitTests.csproj
+		SccProjectTopLevelParentUniqueName6 = LocationData.sln
+		SccProjectName6 = LocationData.Data.UnitTests
+		SccLocalPath6 = LocationData.Data.UnitTests
+		SccProjectUniqueName7 = ApiRepository.UnitTests\\LocationData.ApiRepository.UnitTests.csproj
+		SccProjectTopLevelParentUniqueName7 = LocationData.sln
+		SccProjectName7 = ApiRepository.UnitTests
+		SccLocalPath7 = ApiRepository.UnitTests
 	EndGlobalSection
 EndGlobal

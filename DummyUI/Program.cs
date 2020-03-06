@@ -2,20 +2,20 @@
 
 namespace DummyUI
 {
-    using System.Collections.Generic;
     using AutoMapper;
+    using LocationData.ApiRepository;
     using LocationData.ApiRepository.Facades;
+    using LocationData.Core.Extensions;
     using LocationData.Core.Mappings;
+    using LocationData.Core.Models;
     using LocationData.Core.Models.City;
     using LocationData.Core.Models.Weather;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
-    using LocationData.Core.Extensions;
-    using LocationData.Core.Models;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
 
     class Program
     {
@@ -27,6 +27,7 @@ namespace DummyUI
                 .AddLogging()
                 .AddTransient<IWeatherData, WeatherData>()
                 .AddTransient<ICity, City>()
+                .AddTransient<IClient, Client>()
                 .AddTransient<IWeatherDataFacade, WeatherApiFacade>()
                 .AddTransient<ICityDataFacade, CityApiFacade>()
                 .AddAutoMapper(Assembly.GetAssembly(typeof(LocationProfile)))
@@ -62,8 +63,8 @@ namespace DummyUI
             Console.WriteLine("Please enter a city");
             var cityInput = Console.ReadLine();
 
-            var city = cityData.GetCityData<City>(cityInput).Result.FirstOrDefault();
-            var weather = weatherData.GetWeatherDataForLngLat<WeatherData>(city.Latlng[0], city.Latlng[1]).Result;
+            var city = cityData.GetCityData(cityInput).Result;
+            var weather = weatherData.GetWeatherDataForLngLat(25, 54).Result;
 
             var result = mapper.Map<CombinedLocationData>(city).Map(mapper, weather);
 

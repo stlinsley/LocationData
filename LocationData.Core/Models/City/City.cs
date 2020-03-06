@@ -1,7 +1,7 @@
 ﻿namespace LocationData.Core.Models.City
 {
-    using System.Collections.Generic;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public class City : ICity
     {
@@ -21,7 +21,7 @@
         public long Population { get; set; }
 
         [JsonProperty("latlng")]
-        public List<long> Latlng { get; set; }
+        public List<decimal> Latlng { get; set; }
 
         [JsonProperty("currencies")]
         public List<Currency> Currencies { get; set; }

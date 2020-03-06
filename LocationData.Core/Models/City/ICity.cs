@@ -9,7 +9,7 @@
         string Alpha3Code { get; set; }
         string CityName { get; set; }
         long Population { get; set; }
-        List<long> Latlng { get; set; }
+        List<decimal> Latlng { get; set; }
         List<Currency> Currencies { get; set; }
     }
 }

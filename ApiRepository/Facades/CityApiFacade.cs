@@ -2,22 +2,19 @@
 {
     using Microsoft.Extensions.Options;
     using System;
-    using System.Collections.Generic;
-    using System.IO;
     using System.Net.Http;
-    using Newtonsoft.Json;
     using System.Threading.Tasks;
 
     public class CityApiFacade : ICityDataFacade
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly JsonSerializer _serializer;
+        private readonly IClient _client;
+        private readonly ISerialization _serialization;
         private readonly string _baseUri;
 
-        public CityApiFacade(IHttpClientFactory httpClientFactory, IOptionsMonitor<CityDataFacadeOptions> options, JsonSerializer serializer)
+        public CityApiFacade(IClient client, IOptionsMonitor<CityDataFacadeOptions> options, ISerialization serialization)
         {
-            _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
-            _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
+            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _serialization = serialization ?? throw new ArgumentNullException(nameof(serialization));
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -26,24 +23,17 @@
             _baseUri = options.CurrentValue.BaseUri;
         }
 
-        public async Task<List<T>> GetCityData<T>(string city)
+        public async Task<T> GetCityData<T>(string city)
         {
             if (string.IsNullOrEmpty(city)) throw new ArgumentNullException(nameof(city));
-            var client = _httpClientFactory.CreateClient();
-
-            var request = CreateRequest(city);
-
-            var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-
-            using (var streamReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
-            using (var textReader = new JsonTextReader(streamReader))
-            {
-                return await Task.Run(() => _serializer.Deserialize<List<T>>(textReader));
-            }
+            var response = await _client.SendAsyncRequest(_client.CreateClient(), CreateRequest(city), HttpCompletionOption.ResponseHeadersRead);
+            //return await _serialization.Deserialize<T>(response);
+            return await _serialization.Deserialize<T>(response);
         }
 
         private HttpRequestMessage CreateRequest(string city)
         {
+            if (city == null) throw new ArgumentNullException(nameof(city));
             return new HttpRequestMessage(HttpMethod.Get, $"{_baseUri}/capital/{city}");
         }
     }

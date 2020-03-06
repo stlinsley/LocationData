@@ -4,6 +4,8 @@
 
     public class Currency : ICurrency
     {
+        public int CurrencyId { get; set; }
+
         [JsonProperty("code")]
         public string Code { get; set; }
 

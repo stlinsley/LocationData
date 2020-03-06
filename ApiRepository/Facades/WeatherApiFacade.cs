@@ -1,9 +1,7 @@
 ﻿namespace LocationData.ApiRepository.Facades
 {
     using Microsoft.Extensions.Options;
-    using Newtonsoft.Json;
     using System;
-    using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
 
@@ -11,13 +9,13 @@
     {
         private readonly string _apiKey;
         private readonly string _baseUri;
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly JsonSerializer _serializer;
+        private readonly IClient _client;
+        private readonly ISerialization _serialization;
 
-        public WeatherApiFacade(IHttpClientFactory httpClientFactory, IOptionsMonitor<WeatherDataFacadeOptions> options, JsonSerializer serializer)
+        public WeatherApiFacade(IClient client, IOptionsMonitor<WeatherDataFacadeOptions> options, ISerialization serialization)
         {
-            _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
-            _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
+            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _serialization = serialization ?? throw new ArgumentNullException(nameof(serialization));
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -29,17 +27,8 @@
 
         public async Task<T> GetWeatherDataForLngLat<T>(decimal lng, decimal lat)
         {
-            var client = _httpClientFactory.CreateClient();
-
-            var request = CreateRequest(lng, lat);
-
-            var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-
-            using (var streamReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
-            using (var textReader = new JsonTextReader(streamReader))
-            {
-                return await Task.Run(() => _serializer.Deserialize<T>(textReader));
-            }
+            var response = await _client.SendAsyncRequest(_client.CreateClient(), CreateRequest(lng, lat), HttpCompletionOption.ResponseHeadersRead);
+            return await _serialization.Deserialize<T>(response);
         }
 
         private HttpRequestMessage CreateRequest(decimal lng, decimal lat)

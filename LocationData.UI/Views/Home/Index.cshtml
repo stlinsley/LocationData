@@ -1,0 +1,57 @@
+﻿@model List<LocationData.Core.Models.CombinedLocationData>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <p>This page will display the existing cities, currently pulling from a json file currently. Will also allow searching for a city, adding a new city, editing a city and deleting a city</p>
+    @using(Html.BeginForm("Search", "Home", FormMethod.Post))
+    {
+    <label for="searchTerm">City search:</label>
+    <input type="text" id="searchTerm" name="searchTerm" />
+    <input type="submit" value="Search" />
+    }
+    <table class="table table-responsive table-hover">
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CityNameSortParam"]">City Name</a>
+            </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@ViewData["CountrySortParam"]">Country</a>
+        </th>
+            <th>Alpha2 Code</th>
+            <th>Alpha3 Code</th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PopulationSortParam"]">Population</a>
+            </th>
+            <th>Weather</th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CurrencySortParam"]">Currency</a>
+            </th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+        </tr>
+        @if (Model != null && Model.Count != 0)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CityName</td>
+                    <td>@item.Country</td>
+                    <td>@item.Alpha2Code</td>
+                    <td>@item.Alpha3Code</td>
+                    <td>@item.Population.ToString("#,#")</td>
+                    <td>@item.Weather</td>
+                    <td>@item.Currency.Name</td>
+                    <td>@item.Latitude</td>
+                    <td>@item.Longitude</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id" asp>Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>

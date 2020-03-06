@@ -11,7 +11,10 @@
         public LocationProfile()
         {
             CreateMap<City, CombinedLocationData>()
-                .ForMember(m => m.Weather, x => x.Ignore());
+                .ForMember(m => m.Latitude, x => x.MapFrom( l => l.Latlng[1]))
+                .ForMember(m => m.Longitude, x => x.MapFrom( l => l.Latlng[0]))
+                .ForMember(m => m.Weather, x => x.Ignore())
+                .ForMember(m => m.Currency, x => x.MapFrom(c => c.Currencies.FirstOrDefault()));
             CreateMap<WeatherData, CombinedLocationData>()
                 .ForMember(s => s.Weather,
                     x => x.MapFrom(

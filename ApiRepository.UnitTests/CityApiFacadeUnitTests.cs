@@ -1,40 +1,38 @@
 ﻿namespace ApiRepository.UnitTests
 {
+    using LocationData.ApiRepository;
+    using LocationData.ApiRepository.Facades;
+    using Microsoft.Extensions.Options;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+    using Shouldly;
     using System;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
-    using System.Threading;
     using System.Threading.Tasks;
-    using LocationData.ApiRepository.Facades;
     using LocationData.Core.Models.City;
-    using Microsoft.Extensions.Options;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Moq;
-    using Moq.Protected;
-    using Newtonsoft.Json;
-    using Shouldly;
 
     [TestClass]
     public class CityApiFacadeUnitTests
     {
         private CityApiFacade _city;
-        private Mock<IHttpClientFactory> _clientFactory;
+        private Mock<IClient> _client;
         private Mock<IOptionsMonitor<CityDataFacadeOptions>> _options;
         private Mock<CityDataFacadeOptions> _cityOptions;
-        private Mock<JsonSerializer> _jsonSerializer;
+        private Mock<ISerialization> _serialization;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _clientFactory = new Mock<IHttpClientFactory>();
+            _client = new Mock<IClient>();
             _options = new Mock<IOptionsMonitor<CityDataFacadeOptions>>();
+            _serialization = new Mock<ISerialization>();
             _cityOptions = new Mock<CityDataFacadeOptions>();
             _cityOptions.SetupAllProperties();
             _cityOptions.Object.BaseUri = "https://test.com";
-            _jsonSerializer = new Mock<JsonSerializer>();
             _options.Setup(x => x.CurrentValue).Returns(new CityDataFacadeOptions());
-            _city = new CityApiFacade(_clientFactory.Object, _options.Object, _jsonSerializer.Object);
+            _city = new CityApiFacade(_client.Object, _options.Object, _serialization.Object);
         }
 
         [TestCleanup]
@@ -46,21 +44,21 @@
         #region Constructor tests
 
         [TestMethod]
-        public void CityApiFacade_HttpClientFactoryNull_ThrowsArgumentNullException()
+        public void CityApiFacade_ClientFactoryNull_ThrowsArgumentNullException()
         {
-            Should.Throw<ArgumentNullException>(() => { _city = new CityApiFacade(null, _options.Object, _jsonSerializer.Object); });
+            Should.Throw<ArgumentNullException>(() => { _city = new CityApiFacade(null, _options.Object, _serialization.Object); });
         }
 
         [TestMethod]
         public void CityApiFacade_OptionsNull_ThrowsArgumentNullException()
         {
-            Should.Throw<ArgumentNullException>(() => { _city = new CityApiFacade(_clientFactory.Object, null, _jsonSerializer.Object); });
+            Should.Throw<ArgumentNullException>(() => { _city = new CityApiFacade(_client.Object, null, _serialization.Object); });
         }
 
         [TestMethod]
-        public void CityApiFacade_JsonSerializerNull_ThrowsArgumentNullException()
+        public void CityApiFacade_SeralizationNull_ThrowsArgumentNullException()
         {
-            Should.Throw<ArgumentNullException>(() => { _city = new CityApiFacade(_clientFactory.Object, _options.Object, null); });
+            Should.Throw<ArgumentNullException>(() => { _city = new CityApiFacade(_client.Object, _options.Object, null); });
         }
 
         #endregion
@@ -72,7 +70,7 @@
         {
             await Should.ThrowAsync<ArgumentNullException>(async () =>
             {
-                await _city.GetCityData<City>(null);
+                await _city.GetCityData<List<City>>(null);
             });
         }
 
@@ -81,36 +79,31 @@
         {
             await Should.ThrowAsync<ArgumentNullException>(async () =>
             {
-                await _city.GetCityData<City>("");
+                await _city.GetCityData<List<City>>("");
             });
         }
 
         [TestMethod]
         public async Task GetCityData_ReturnsListOfCity()
         {
-            var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
-            handlerMock.Protected()
-                .Setup<Task<HttpResponseMessage>>(
-                    "SendAsync",
 
-                    ItExpr.IsAny<HttpRequestMessage>(),
-                    ItExpr.IsAny<CancellationToken>()
-                )
-                .ReturnsAsync(new HttpResponseMessage()
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(
-                        "[{'name': 'United Kingdom of Great Britain and Northern Ireland','alpha2Code': 'GB','alpha3Code': 'GBR','capital': 'London'," +
-                        "'population': 65110000,'latlng': [54,-2],'currencies': [{'code': 'GBP','name': 'British pound','symbol': '£'}]}]")});
+            _client.Setup(x => x.CreateClient()).Returns(new HttpClient());
 
-            var httpClient = new HttpClient(handlerMock.Object)
+            _client.Setup(x => x.SendAsyncRequest(
+                It.IsAny<HttpClient>(),
+                It.IsAny<HttpRequestMessage>(),
+                It.IsAny<HttpCompletionOption>()
+            )).ReturnsAsync(new HttpResponseMessage()
             {
-                BaseAddress = new Uri("http://test.com/")
-            };
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent("")
+                }
+            );
 
-            _clientFactory.Setup(x => x.CreateClient(It.IsAny<string>())).Returns(httpClient);
+            _serialization.Setup(s => s.Deserialize<List<City>>(It.IsAny<HttpResponseMessage>())).Returns(Task.Run(() => new List<City>()));
 
-            var response = await _city.GetCityData<City>("london");
+            var response = await _city.GetCityData<List<City>>("london");
+            
             response.ShouldBeOfType<List<City>>();
         }
 
